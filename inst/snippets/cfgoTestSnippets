@@ -1,0 +1,58 @@
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+snippet testscript
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+# 1) Save file as "test_${1:name of tested function}" in inst\tinytest.
+# 2) Paste here all (other) variable names of the function, theire allowed 
+#    classes and possible choices:
+#    variable name: allowed classes, choice options
+#    variable name: allowed classes, choice options
+#     if there is more than one outcome class add the others by hand.
+# 3) Finish the test script. The following remarks might help. Feel free to add 
+#      remarks.
+#   
+#   `assistant::delete_all` deletes all breaks and spaces of a character value. 
+#      This might be useful when using `expect_equal` on characters
+#   
+# 4) Delete this and everythin above; test script finished :)
+################################################################################
+
+# No error and correct output for correct input---------------------------------
+
+expect_silent(${1:name of tested function}(${2:variable name} = ${3: permitted variable value}))
+expect_true(inherits(${1:name of tested function}(${2:variable name} = ${3: permitted variable value}), "${6:class of function outcome}"))
+
+#Error for wrong input----------------------------------------------------------
+
+#${2:variable name} Input of wrong class
+expect_error(${1:name of tested function}(${2:variable name} = ${4: variable input of wrong class}))
+err <- tryCatch(${1:name of tested function}(${2:variable name} = ${4: variable input of wrong class}),
+                error = function(err) err)
+expect_true(rlang::inherits_all(
+  err,c("${1:name of tested function}_${2:variable name}_error", "rlang_error")
+  ))
+expect_equal(err\$value, ${4: variable input of wrong class})
+expect_equal(err\$current_class, variable input of wrong class)
+#${2:variable name} Input of correct class but none of the allowed options
+expect_error(${1:name of tested function}(${2:variable name} = ${5: variable input of wright class but not existing option}))
+err <- tryCatch(${1:name of tested function}(${2:variable name} = ${5: variable input of wright class but not existing option}),
+                error = function(err) err)
+expect_true(rlang::inherits_all(
+  err,c("rlang_error", "error", "condition")
+))
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+snippet check_variables
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+#Checks-------------------------------------------------------------------------
+assistant::check_class(${1:variable}, "${2:permited-variable-class}", fun_name = "${3:name of function}")
+#If there are only limited input options to choose from use:
+stage <- rlang::arg_match(${1:variable}, c("${4:variable option 1}", "${5:variable option 2}"))
+#-------------------------------------------------------------------------------	
