@@ -1,1 +1,2 @@
-# cfgoTest
+# Initial page
+
