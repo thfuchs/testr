@@ -22,27 +22,25 @@ snippet testscript
 
 # No error and correct output for correct input---------------------------------
 
-expect_silent(${1:name of tested function}(${2:variable name} = ${3: permitted variable value}))
-expect_true(inherits(${1:name of tested function}(${2:variable name} = ${3: permitted variable value}), "${6:class of function outcome}"))
+#${2:variable name}
+expect_silent(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}))
+expect_true(inherits(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}), "${4:expected class of function outcome}"))
+expect_equal(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}), "${5:expected outcome}"))
 
 #Error for wrong input----------------------------------------------------------
 
 #${2:variable name} Input of wrong class
-expect_error(${1:name of tested function}(${2:variable name} = ${4: variable input of wrong class}))
-err <- tryCatch(${1:name of tested function}(${2:variable name} = ${4: variable input of wrong class}),
+expect_error(${1:name of tested function}(${2:variable name} = ${6: variable input of wrong class}))
+err <- tryCatch(${1:name of tested function}(${2:variable name} = ${6: variable input of wrong class}),
                 error = function(err) err)
-expect_true(rlang::inherits_all(
-  err,c("${1:name of tested function}_${2:variable name}_error", "rlang_error")
-  ))
-expect_equal(err\$value, ${4: variable input of wrong class})
+expect_true(rlang::inherits_all(err,c("${1:name of tested function}_${2:variable name}_error", "rlang_error")))
+expect_equal(err\$value, ${6: variable input of wrong class})
 expect_equal(err\$current_class, variable input of wrong class)
 #${2:variable name} Input of correct class but none of the allowed options
-expect_error(${1:name of tested function}(${2:variable name} = ${5: variable input of wright class but not existing option}))
-err <- tryCatch(${1:name of tested function}(${2:variable name} = ${5: variable input of wright class but not existing option}),
+expect_error(${1:name of tested function}(${2:variable name} = ${7: variable input of right class but not existing option}))
+err <- tryCatch(${1:name of tested function}(${2:variable name} = ${7: variable input of right class but no existing option}),
                 error = function(err) err)
-expect_true(rlang::inherits_all(
-  err,c("rlang_error", "error", "condition")
-))
+expect_true(rlang::inherits_all(err,c("rlang_error", "error", "condition")))
 
 
 -------------------------------------------------------------------------------
