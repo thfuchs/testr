@@ -1,50 +1,33 @@
-
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
 snippet testvariable
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
-#${2:variable name}
-################################################################################
-#Correct input gives no error and expected output
-expect_silent(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}))
-expect_true(inherits(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}), "${4:expected class of function outcome}"))
-expect_equal(${1:name of tested function}(${2:variable name} = ${3: permitted variable input}), "${5:expected outcome}"))
-#Input of Wrong class gives error
-expect_error(${1:name of tested function}(${2:variable name} = ${6: variable input of wrong class}))
-err <- tryCatch(${1:name of tested function}(${2:variable name} = ${6: variable input of wrong class}),
-                error = function(err) err)
-expect_true(rlang::inherits_all(err,c("${1:name of tested function}_${2:variable name}_error", "rlang_error")))
-expect_equal(err\$value, ${6: variable input of wrong class})
-expect_equal(err\$current_class, variable input of wrong class)
-#Input of correct class but not of the allowed options gives error
-expect_error(${1:name of tested function}(${2:variable name} = ${7: variable input of right class but not existing option}))
-err <- tryCatch(${1:name of tested function}(${2:variable name} = ${7: variable input of right class but no existing option}),
-                error = function(err) err)
-expect_true(rlang::inherits_all(err,c("rlang_error", "error", "condition")))
-
-
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-snippet checkvariable_with_line
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
-#Checks-------------------------------------------------------------------------
-assistant::check_class(${1:variable name}, "${2:permited variable input class}", fun_name = "${3:name of function}")
-#If there are only limited input options to choose from use:
-stage <- rlang::arg_match(${1:variable name}, c("${4:variable option 1}", "${5:variable option 2}"))
-#-------------------------------------------------------------------------------
-
-
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-snippet checkvariable
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
-assistant::check_class(${1:variable}, "${2:permited-variable-class}", fun_name = "${3:name of function}")
-#If there are only limited input options to choose from use:
-stage <- rlang::arg_match(${1:variable}, c("${4:variable option 1}", "${5:variable option 2}"))
+	#${2:variable you want tested}
+	################################################################################
+	#Correct input gives no error and expected output
+	expect_silent(
+	  output <- ${1:name of tested function}(${2:variable you want tested} = ${3: permitted variable input} ${4:variables without default value})
+	)
+	expect_true(rlang::inherits_all(output, c(${5:expected classes of output})))
+	expect_equal(output, "${6:expected output}")
+	#Input of Wrong class gives error
+	expect_error(${1:name of tested function}(${2:variable you want tested} = ${7: variable input of wrong class} ${4:variables without default value}))
+	err <- tryCatch(${1:name of tested function}(${2:variable you want tested} = ${7: variable input of wrong class} ${4:variables without default value}),
+	                error = function(err) err)
+	expect_true(rlang::inherits_all(err,c("${1:name of tested function}_${2:variable name}_error", "rlang_error")))
+	#Input of correct class but not of the allowed options gives error
+	expect_error(${1:name of tested function}(${2:variable you want tested} = ${8: variable input of right class but not existing option} ${4:variables without default value}))
+	err <- tryCatch(${1:name of tested function}(${2:variable you want tested} = ${8: variable input of right class but no existing option} ${4:variables without default value}),
+	                error = function(err) err)
+	expect_true(rlang::inherits_all(err,c("rlang_error", "error", "condition")))
 		
+
+	
+
+snippet checkvariable_with_line
+	#Checks-----------------------------------------------------------------------
+	assistant::check_class(${1:variable}, "${2:permited-variable-class}", fun_name = "${3:name of function}")
+	stage <- rlang::arg_match(${1:variable}, c(${4:variable options}))
+	#-----------------------------------------------------------------------------
+
+
+snippet checkvariable
+	assistant::check_class(${1:variable}, "${2:permited-variable-class}", fun_name = "${3:name of function}")
+	stage <- rlang::arg_match(${1:variable}, c(${4:variable options}))
