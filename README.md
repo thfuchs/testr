@@ -21,10 +21,13 @@ For testing R Packages, CFgO uses the [tinytest](https://github.com/markvanderlo
 While serving as basic testing framework, most other packages depend on it. As experimental status basge suggests, this "framework" is just implemented and could be used for several further testing purposes including [`shiny::testServer()`](https://github.com/rstudio/shiny) for integration tests or [`dittodb`](https://github.com/ropensci/dittodb) for database mocking functions.
 
 ## On which packages does cfgoTest depends on?
-- `rlang`
-- `stringr`
-- `magrittr`
-- `tinytest`
+
+|                |
+| :------------- |
+| `rlang`        |
+| `stringr`      |
+| `magrittr`     |
+| `tinytest`     |
 
 ## Additional Information
 
