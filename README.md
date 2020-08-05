@@ -1,8 +1,8 @@
 # cfgoTest
 
-![lint](https://github.com/cfgo/cfgoTest/workflows/R-CMD-Production/badge.svg)
-![lint](https://github.com/cfgo/cfgoTest/workflows/R-CMD-Windows/badge.svg)
-![lint](https://github.com/cfgo/cfgoTest/workflows/covr/badge.svg)
+![R-CMD-Production](https://github.com/cfgo/cfgoTest/workflows/R-CMD-Production/badge.svg)
+![R-CMD-Windows](https://github.com/cfgo/cfgoTest/workflows/R-CMD-Windows/badge.svg)
+![Code Coverage](https://github.com/cfgo/cfgoTest/workflows/Code%20Coverage/badge.svg)
 ![lint](https://github.com/cfgo/cfgoTest/workflows/lint/badge.svg)
 
 [![minimal R
