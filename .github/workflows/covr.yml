@@ -1,0 +1,71 @@
+name: Code Coverage
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  covr:
+    runs-on: ubuntu-18.04
+    container: cfgo/gh-actions:covr
+    
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Query dependencies
+        run: |
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+        shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+
+      - name: Unit-test coverage
+        id: path
+        run: |
+          tests <- covr::package_coverage(type = "tests")
+          path_tests <- file.path("test-reports", "covr-tests.html")
+          covr::report(x = tests, file = path_tests, browse = FALSE)
+          
+          tests <- covr::package_coverage(type = "tests")
+          tests_list <- covr::coverage_to_list(tests)
+          warning("Total Unit Test Coverage: ", tests_list$totalcoverage, "%")
+          
+          tests_df <- as.data.frame(tests_list$filecoverage)
+          
+          for (i in 1:nrow(tests_df)) {
+            name <- row.names(tests_df)[i]
+            value <- tests_df[i,]
+            if (value < 100) warning(name, ": ", value, "%")
+          }
+          
+          if (tests_list$totalcoverage < 100) stop("Code Coverage not 100%")
+        shell: Rscript {0}
+          
+      - name: Example coverage
+        run: |
+          examples <- covr::package_coverage(type = c("examples"))
+          path_examples <- file.path("test-reports", "covr-examples.html")
+          covr::report(x = examples, file = path_examples, browse = FALSE)
+          
+          examples <- covr::package_coverage(type = "examples")
+          examples_list <- covr::coverage_to_list(examples)
+          warning("Total Examples Coverage: ", examples_list$totalcoverage, "%")
+          
+          examples_df <- as.data.frame(examples_list$filecoverage)
+          
+          for (i in 1:nrow(examples_df)) {
+            name <- row.names(examples_df)[i]
+            value <- examples_df[i,]
+            if (value < 100) warning(name, ": ", value, "%")
+          }
+        shell: Rscript {0}
+        
+      - name: Upload files
+        uses: actions/upload-artifact@master
+        with:
+          name: Coverage Reports
+          path: test-reports

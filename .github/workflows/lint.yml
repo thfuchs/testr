@@ -1,33 +1,25 @@
+name: lint
+
 on:
   pull_request:
     branches:
       - master
 
-name: lint
-
 jobs:
   lint:
-    runs-on: windows-latest
+    runs-on: ubuntu-18.04
+    container: cfgo/gh-actions:base
+    
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-
+    
       - name: Query dependencies
         run: |
-          install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
         shell: Rscript {0}
 
-      - name: Cache R packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: windows-r-3.6-${{ hashFiles('depends.Rds') }}
-          restore-keys: windows-r-3.6-
-
       - name: Install dependencies
         run: |
-          install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("lintr")
         shell: Rscript {0}
