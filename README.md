@@ -29,7 +29,6 @@ While serving as basic testing framework, most other packages depend on it. As e
 | `rlang`        |
 | `stringr`      |
 | `magrittr`     |
-| `tinytest`     |
 
 ## Additional Information
 
