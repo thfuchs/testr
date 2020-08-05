@@ -8,7 +8,7 @@
 #' @return `char` without all its empty spaces and breaks.
 #' @export
 #'
-#' @example examples/example_delete_space.R
+#' @example inst/examples/example_delete_space.R
 #' 
 delete_space <- function(char) {
     # Checks--------------------------------------------------------------------

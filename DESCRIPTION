@@ -1,18 +1,17 @@
 Package: cfgoTest
 Title: CFgO Testing
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Thomas", "Fuchs", email = "thomas.fuchs@cfgo.de", role = c("aut", "cre"))
-Description: Everything we need for testing at CFgO.
+Description: Package to provide additional assisting functions to help (unit) testing.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
     rlang,
     stringr,
-    magrittr,
-    tinytest
-RoxygenNote: 7.1.0
+    magrittr
+RoxygenNote: 7.1.1
 URL: https://github.com/TFcfgo/CFgOwidgets
 BugReports: https://github.com/cfgo/cfgoTest
 Depends: R (>= 3.6.0)
-
+Suggests: tinytest

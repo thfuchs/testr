@@ -19,24 +19,24 @@ check_class(var, type, fun_name, allowNULL = FALSE)
 silent if check is passed, rlang error otherwise
 }
 \description{
-Match variable class with the one specified and abort by 
+Match variable class with the one specified and abort by
  `\link[rlang]{abort}` otherwise.
 }
 \examples{
   id <- "chr"
   check_class(id, "character", fun_name = "function")
-  
+
   id <- 2
   check_class(id, "numeric", fun_name = "fun")
-  
+
   # pass check if variable NULL
   id <- NULL
   check_class(id, "character", fun_name = "function", allowNULL = TRUE)
-  
+
   \dontrun{
     # generates error
     id <- 2
     check_class(id, "character", fun_name = "function")
   }
-  
+
 }

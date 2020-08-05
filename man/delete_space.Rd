@@ -17,9 +17,9 @@ Deletes all empty space and all breaks in a character vector. This can be
 usefull when applying `expect_eqal` on character strings.
 }
 \examples{
-
+#Problem
 if (interactive()){
-  #Problem
+
   tinytest::expect_equal(
     "abcd",
     "a  b    c
