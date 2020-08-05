@@ -15,7 +15,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 For testing R Packages, CFgO uses the [tinytest](https://github.com/markvanderloo/tinytest) Framework.  
 `cfgoTest` therefore provides
 1. additional assisting functions to help testing, in particular unit testing (currently) and
-2. testing snippets, see [snippets](inst/snippets) which are useful for writing unit tests with RStudio (see [here for more information](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets)
+2. testing snippets, see [snippets](inst/snippets) which are useful for writing unit tests with RStudio (see [here for more information](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets))
 
 ## How is cfgoTest related to other cfgo packages?
 `cfgoTest` is one of the base packages with no dependencies across other cfgo packages.
