@@ -39,10 +39,10 @@ jobs:
           for (i in 1:nrow(tests_df)) {
             name <- row.names(tests_df)[i]
             value <- tests_df[i,]
-            if (value < 100) warning(name, ": ", value, "%")
+            if (value < 90) warning(name, ": ", value, "%")
           }
           
-          if (tests_list$totalcoverage < 100) stop("Code Coverage not 100%")
+          if (tests_list$totalcoverage < 80) stop("Code Coverage below 80%")
         shell: Rscript {0}
           
       - name: Example coverage
@@ -60,7 +60,7 @@ jobs:
           for (i in 1:nrow(examples_df)) {
             name <- row.names(examples_df)[i]
             value <- examples_df[i,]
-            if (value < 100) warning(name, ": ", value, "%")
+            if (value < 90) warning(name, ": ", value, "%")
           }
         shell: Rscript {0}
         
