@@ -1,7 +1,7 @@
 Package: testr
 Title: Supporting (unit) testing with tinytest
 Version: 0.0.2
-Authors@R: person("Thomas", "Fuchs", email = "thomas.fuchs@cfgo.de", role = c("aut", "cre"))
+Authors@R: person("Thomas", "Fuchs", email = "thomasfuchs-re@web.de", role = c("aut", "cre"))
 Description: Package to provide additional assisting functions to help (unit) testing.
 License: GPL-3
 Encoding: UTF-8
