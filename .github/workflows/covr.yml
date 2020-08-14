@@ -8,7 +8,7 @@ on:
 jobs:
   covr:
     runs-on: ubuntu-18.04
-    container: cfgo/gh-actions:covr
+    container: thfuchs/ghactions:covr
     
     steps:
       - uses: actions/checkout@v2
