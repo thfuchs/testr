@@ -12,17 +12,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![packageversion](https://img.shields.io/badge/Package%20version-0.0.2-orange.svg?style=flat-square)](commits/master)
 
 ## What is testr for?
-For testing R Packages, CFgO uses the [tinytest](https://github.com/markvanderloo/tinytest) Framework.  
-`testr` therefore provides
+`testr` provides:
 1. additional assisting functions to help testing, in particular unit testing (currently) and
 2. testing snippets, see [snippets](inst/snippets) which are useful for writing unit tests with RStudio (see [here for more information](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets))
 
-## How is testr related to other cfgo packages?
-`testr` is one of the base packages with no dependencies across other cfgo packages.
-
-While serving as basic testing framework, most other packages depend on it. As experimental status basge suggests, this "framework" is just implemented and could be used for several further testing purposes including [`shiny::testServer()`](https://github.com/rstudio/shiny) for integration tests or [`dittodb`](https://github.com/ropensci/dittodb) for database mocking functions.
-
-## On which packages does cfgoTest depends on?
+## On which packages does testr depends on?
 
 |                |
 | :------------- |
@@ -31,4 +25,4 @@ While serving as basic testing framework, most other packages depend on it. As e
 | `magrittr`     |
 
 ## Additional Information
-
+As experimental status basge suggests, this "framework" is just implemented and could be used for several further testing purposes including [`shiny::testServer()`](https://github.com/rstudio/shiny) for integration tests or [`dittodb`](https://github.com/ropensci/dittodb) for database mocking functions.
