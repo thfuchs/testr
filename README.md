@@ -9,7 +9,7 @@
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.2-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.3-orange.svg?style=flat-square)](commits/master)
 
 ## What is testr for?
 `testr` provides:
@@ -21,8 +21,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 |                |
 | :------------- |
 | `rlang`        |
-| `stringr`      |
-| `magrittr`     |
 
 ## Additional Information
 As experimental status basge suggests, this "framework" is just implemented and could be used for several further testing purposes including [`shiny::testServer()`](https://github.com/rstudio/shiny) for integration tests or [`dittodb`](https://github.com/ropensci/dittodb) for database mocking functions.
