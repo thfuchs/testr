@@ -4,7 +4,7 @@
 \alias{check_class}
 \title{Check variable class}
 \usage{
-check_class(var, type, fun_name, allowNULL = FALSE)
+check_class(var, type, fun_name = NULL, allowNULL = FALSE)
 }
 \arguments{
 \item{var}{variable to check}
@@ -24,19 +24,19 @@ Match variable class with the one specified and abort by
 }
 \examples{
   id <- "chr"
-  check_class(id, "character", fun_name = "function")
+  check_class(id, "character")
 
   id <- 2
-  check_class(id, "numeric", fun_name = "fun")
+  check_class(id, "numeric")
 
   # pass check if variable NULL
   id <- NULL
-  check_class(id, "character", fun_name = "function", allowNULL = TRUE)
+  check_class(id, "character", allowNULL = TRUE)
 
   \dontrun{
     # generates error
     id <- 2
-    check_class(id, "character", fun_name = "function")
+    check_class(id, "character")
   }
 
 }
