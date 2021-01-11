@@ -58,7 +58,7 @@ check_class <- function(var, type, fun_name = NULL, allowNULL = FALSE) {
   ### Function -----------------------------------------------------------------
   var_name <- deparse(substitute(var))
   fun_name <- if (sys.parent() > 0) deparse(sys.call(sys.parent())[[1]])
-  
+
   if (
     # 1. allow NULL
     if (allowNULL) !is.null(var) && !inherits(var, type) else

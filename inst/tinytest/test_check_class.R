@@ -8,7 +8,7 @@ expect_silent(check_class(2L, type = "integer"))
 expect_silent(check_class(TRUE, type = "logical"))
 expect_silent(check_class(FALSE, type = "logical"))
 expect_silent(check_class(NULL, type = "NULL"))
-expect_silent(check_class(data.frame(A =c (1, 2)), type = "data.frame"))
+expect_silent(check_class(data.frame(A = c(1, 2)), type = "data.frame"))
 
 # allowNULL (Exception from e.g. character)
 expect_silent(check_class(NULL, type = "character", allowNULL = TRUE))
@@ -24,15 +24,15 @@ expect_error(check_class(id, type = 12), class = "check_class_type_error")
 
 # allowNULL
 expect_error(
-  check_class(id, type = "numeric", allowNULL = "x"), 
+  check_class(id, type = "numeric", allowNULL = "x"),
   class = "check_class_allowNULL_error"
 )
 expect_error(
-  check_class(id, type = "numeric", allowNULL = NULL), 
+  check_class(id, type = "numeric", allowNULL = NULL),
   class = "check_class_allowNULL_error"
 )
 expect_error(
-  check_class(id, type = "numeric", allowNULL = 12), 
+  check_class(id, type = "numeric", allowNULL = 12),
   class = "check_class_allowNULL_error"
 )
 
@@ -43,8 +43,14 @@ expect_error(check_class(2, "data.frame"), class = "eval_2_error")
 expect_error(check_class(2, "data.frame"), class = "rlang_error")
 expect_error(check_class(TRUE, "data.frame"), class = "eval_TRUE_error")
 expect_error(check_class(TRUE, "data.frame"), class = "rlang_error")
-expect_error(check_class(NULL, "character", allowNULL = FALSE), class = "eval_NULL_error")
-expect_error(check_class(NULL, "character", allowNULL = FALSE), class = "rlang_error")
+expect_error(
+  check_class(NULL, "character", allowNULL = FALSE),
+  class = "eval_NULL_error"
+)
+expect_error(
+  check_class(NULL, "character", allowNULL = FALSE),
+  class = "rlang_error"
+)
 
 id <- 1
 err <- tryCatch(
@@ -63,8 +69,8 @@ fun <- function(x) {
 expect_true(fun(1))
 expect_true(fun(NULL))
 expect_error(
-  fun("1"), 
-  class = "fun_x_error", 
+  fun("1"),
+  class = "fun_x_error",
   pattern = "`x` must be numeric, not of class \"character\"\\."
 )
 expect_error(
