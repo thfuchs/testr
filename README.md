@@ -1,15 +1,14 @@
 # testr
 
-![R-CMD-Production](https://github.com/thfuchs/testr/workflows/R-CMD-Production/badge.svg)
-![R-CMD-Windows](https://github.com/thfuchs/testr/workflows/R-CMD-Windows/badge.svg)
+![R-CMD-check](https://github.com/thfuchs/testr/workflows/R-CMD-check/badge.svg)
 ![Code Coverage](https://github.com/thfuchs/testr/workflows/Code%20Coverage/badge.svg)
 ![lint](https://github.com/thfuchs/testr/workflows/lint/badge.svg)
 
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-4.0.0-6666ff.svg)](https://cran.r-project.org/)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.3-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.4-orange.svg?style=flat-square)](commits/master)
 
 ## What is testr for?
 `testr` provides:
