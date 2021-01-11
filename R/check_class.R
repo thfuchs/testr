@@ -58,7 +58,7 @@ check_class <- function(var, type, fun_name = NULL, allowNULL = FALSE) {
   ### Function -----------------------------------------------------------------
   var_name <- deparse(substitute(var))
   fun_name <- if (sys.parent() > 0) deparse(sys.call(sys.parent())[[1]])
-  
+
   if (
     # 1. allow NULL
     if (allowNULL) !is.null(var) && !inherits(var, type) else
@@ -72,8 +72,7 @@ check_class <- function(var, type, fun_name = NULL, allowNULL = FALSE) {
         type,
         paste(class(var), collapse = " / ")
       ),
-      class = sprintf(
-        "%s_%s_error", paste0(fun_name, "_", recycle0 = TRUE), var_name),
+      class = paste0(paste0(fun_name, "_", recycle0 = TRUE), var_name, "_error"),
       value = var,
       current_class = class(var)
     )

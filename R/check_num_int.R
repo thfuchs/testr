@@ -1,4 +1,4 @@
-#' Check variable class for numeric / integer 
+#' Check variable class for numeric / integer
 #'
 #' Match variable class with one of numeric or integer and abort by
 #'  `\link[rlang]{abort}` otherwise.
@@ -28,9 +28,9 @@
 #'
 #' @export
 check_num_int <- function(var, allowNULL = FALSE) {
-  
+
   ### Checks -------------------------------------------------------------------
-  
+
   # allowNULL required - logical
   if (!inherits(allowNULL, "logical")) rlang::abort(
     message = sprintf(
@@ -40,11 +40,11 @@ check_num_int <- function(var, allowNULL = FALSE) {
     class = "check_num_int_allowNULL_error",
     value = allowNULL
   )
-  
+
   ### Function -----------------------------------------------------------------
   var_name <- deparse(substitute(var))
   fun_name <- if (sys.parent() > 0) deparse(sys.call(sys.parent())[[1]])
-  
+
   if (
     # 1. allow NULL
     if (allowNULL) !is.null(var) && !rlang::inherits_any(var, c("numeric", "integer")) else
@@ -57,8 +57,7 @@ check_num_int <- function(var, allowNULL = FALSE) {
         var_name,
         paste(class(var), collapse = " / ")
       ),
-      class = sprintf(
-        "%s_%s_error", paste0(fun_name, "_", recycle0 = TRUE), var_name),
+      class = paste0(paste0(fun_name, "_", recycle0 = TRUE), var_name, "_error"),
       value = var,
       current_class = class(var)
     )
