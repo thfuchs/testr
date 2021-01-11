@@ -57,8 +57,7 @@ check_num_int <- function(var, allowNULL = FALSE) {
         var_name,
         paste(class(var), collapse = " / ")
       ),
-      class = sprintf(
-        "%s_%s_error", paste0(fun_name, "_", recycle0 = TRUE), var_name),
+      class = paste0(paste0(fun_name, "_", recycle0 = TRUE), var_name, "_error"),
       value = var,
       current_class = class(var)
     )
