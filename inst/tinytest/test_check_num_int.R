@@ -6,13 +6,38 @@ expect_silent(check_num_int(2L))
 expect_silent(check_num_int(c(1, 2, 3)))
 expect_silent(check_num_int(as.integer(c(1, 2, 3))))
 
+# n
+expect_silent(check_num_int(2, n = 1))
+expect_silent(check_num_int(2L, n = 1))
+expect_silent(check_num_int(c(1, 2, 3), n = 3))
+expect_silent(check_num_int(as.integer(c(1, 2, 3)), n = 3))
+
 # allowNULL (Exception from e.g. character)
 expect_silent(check_num_int(NULL, allowNULL = TRUE))
+expect_silent(check_num_int(NULL, allowNULL = TRUE, n = 1))
+expect_silent(check_num_int(NULL, allowNULL = TRUE, n = 3))
 
 ### Errors ---------------------------------------------------------------------
 
 # var
 expect_error(check_num_int())
+
+# n
+expect_error(
+  check_num_int(var = "chr", n = TRUE),
+  class = "check_num_int_n_error"
+)
+expect_error(
+  check_num_int(var = "chr", n = -1),
+  class = "check_num_int_n_error",
+  pattern = "^`n` must be not negative numeric\\(1\\) or integer\\(1\\)\\.$"
+)
+expect_error(
+  check_num_int(var = "chr", n = c(1, 2)),
+  class = "check_num_int_n_error",
+  pattern = paste("^`n` must be numeric\\(1\\) or integer\\(1\\),",
+                  "not of class \"numeric\\(2\\)\"\\.$")
+)
 
 # allowNULL
 expect_error(
@@ -43,8 +68,8 @@ expect_equal(err$value, "chr")
 expect_equal(err$current_class, "character")
 
 # check typical use in function
-fun <- function(x) {
-  testr::check_num_int(x, allowNULL = TRUE)
+fun <- function(x, n = NULL) {
+  testr::check_num_int(x, allowNULL = TRUE, n = n)
   TRUE
 }
 expect_true(fun(c(1, 2)))
@@ -54,4 +79,16 @@ expect_error(
   fun("1"),
   class = "fun_x_error",
   pattern = "`x` must be numeric or integer, not of class \"character\"\\."
+)
+expect_error(
+  fun(1, n = 2),
+  "fun_x_error",
+  pattern = paste("`x` must be numeric\\(2\\) or integer\\(2\\),",
+                  "not of class \"numeric\\(1\\)\"\\.")
+)
+expect_error(
+  fun(1, n = 0),
+  "fun_x_error",
+  pattern = paste("`x` must be numeric\\(0\\) or integer\\(0\\),",
+                  "not of class \"numeric\\(1\\)\"\\.")
 )

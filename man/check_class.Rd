@@ -4,7 +4,7 @@
 \alias{check_class}
 \title{Check variable class}
 \usage{
-check_class(var, type, fun_name = NULL, allowNULL = FALSE)
+check_class(var, type, fun_name = NULL, n = NULL, allowNULL = FALSE)
 }
 \arguments{
 \item{var}{variable to check}
@@ -12,6 +12,8 @@ check_class(var, type, fun_name = NULL, allowNULL = FALSE)
 \item{type}{class to check var for}
 
 \item{fun_name}{required function name for error message, as character}
+
+\item{n}{numeric to also check length var}
 
 \item{allowNULL}{allow to pass check if var NULL? FALSE by default}
 }
@@ -28,6 +30,9 @@ Match variable class with the one specified and abort by
 
   id <- 2
   check_class(id, "numeric")
+
+  # check variable type and length
+  check_class(id, "numeric", n = 1)
 
   # pass check if variable NULL
   id <- NULL

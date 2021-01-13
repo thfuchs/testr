@@ -4,10 +4,12 @@
 \alias{check_num_int}
 \title{Check variable class for numeric / integer}
 \usage{
-check_num_int(var, allowNULL = FALSE)
+check_num_int(var, n = NULL, allowNULL = FALSE)
 }
 \arguments{
 \item{var}{variable to check}
+
+\item{n}{numeric to also check length var}
 
 \item{allowNULL}{allow to pass check if var NULL? FALSE by default}
 }
@@ -24,6 +26,9 @@ Match variable class with one of numeric or integer and abort by
 
   id <- 2L
   check_num_int(id)
+  
+  # check variable type and length
+  check_num_int(id, n = 1)
 
   # pass check if variable NULL
   id <- NULL

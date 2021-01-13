@@ -10,8 +10,15 @@ expect_silent(check_class(FALSE, type = "logical"))
 expect_silent(check_class(NULL, type = "NULL"))
 expect_silent(check_class(data.frame(A = c(1, 2)), type = "data.frame"))
 
+# n
+expect_silent(check_class("chr", type = "character", n = 1))
+expect_silent(check_class(c("chr", "chr2"), type = "character", n = 2))
+expect_silent(check_class("chr", type = "character", n = 1L))
+
 # allowNULL (Exception from e.g. character)
 expect_silent(check_class(NULL, type = "character", allowNULL = TRUE))
+expect_silent(check_class(NULL, type = "character", allowNULL = TRUE, n = 1))
+expect_silent(check_class(NULL, type = "numeric", allowNULL = TRUE, n = 2))
 
 ### Errors ---------------------------------------------------------------------
 
@@ -21,6 +28,23 @@ expect_error(check_class(type = "character"))
 # type
 expect_error(check_class(var = "character"))
 expect_error(check_class(id, type = 12), class = "check_class_type_error")
+
+# n
+expect_error(
+  check_class(var = "chr", type = "character", n = TRUE),
+  class = "check_class_n_error"
+)
+expect_error(
+  check_class(var = "chr", type = "character", n = -1),
+  class = "check_class_n_error",
+  pattern = "^`n` must be not negative numeric\\(1\\) or integer\\(1\\)\\.$"
+)
+expect_error(
+  check_class(var = "chr", type = "character", n = c(1, 2)),
+  class = "check_class_n_error",
+  pattern = paste("^`n` must be numeric\\(1\\) or integer\\(1\\),",
+                  "not of class \"numeric\\(2\\)\"\\.$")
+)
 
 # allowNULL
 expect_error(
@@ -62,11 +86,12 @@ expect_equal(err$value, 1)
 expect_equal(err$current_class, "numeric")
 
 # check typical use in function
-fun <- function(x) {
-  testr::check_class(x, "numeric", allowNULL = TRUE)
+fun <- function(x, n = NULL) {
+  testr::check_class(x, "numeric", allowNULL = TRUE, n = n)
   TRUE
 }
 expect_true(fun(1))
+expect_true(fun(1, n = 1))
 expect_true(fun(NULL))
 expect_error(
   fun("1"),
@@ -77,4 +102,14 @@ expect_error(
   fun(1L),
   class = "fun_x_error",
   pattern = "`x` must be numeric, not of class \"integer\"\\."
+)
+expect_error(
+  fun(1, n = 2),
+  "fun_x_error",
+  pattern = "`x` must be numeric\\(2\\), not of class \"numeric\\(1\\)\"\\."
+)
+expect_error(
+  fun(1, n = 0),
+  "fun_x_error",
+  pattern = "`x` must be numeric\\(0\\), not of class \"numeric\\(1\\)\"\\."
 )
